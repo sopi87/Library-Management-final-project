@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Completion</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/js/actions.js}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: ghostwhite">
+<div class="topnav">
+    <a class="active" th:href="@{/}">Home</a>
+    <a th:href="@{/bookings/user}">Recent Bookings</a>
+    <a th:href="@{/logout}" style="float: right">Logout</a>
+</div>
+<div class="jumbotron jumbotron-fluid" style="background-color: ghostwhite">
+    <div class="container">
+        <h1 style="text-align: center; font-family: fantasy;" class="login">Order Status</h1>
+        <hr>
+        <h2 id="orderCompletionMessage"><span th:text="${message}"></span></h2>
+        <h2 id="orderIdMessage"> Below is your Order ID: </h2>
+        <h3 id="bookingId"><span th:text="${bookingId}"></span></h3>
+        <hr>
+        <a th:href="@{/}"
+           class="btn btn-primary">Back to Library
+        </a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Recent Orders</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/js/actions.js}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body style="background-color: ghostwhite">
+<div class="topnav">
+    <a th:href="@{/}">Home</a>
+    <a class="active" th:href="@{/bookings/user}" sec:authorize="hasAuthority('member')">Recent Bookings</a>
+    <a class="active" th:href="@{/bookings/all}" sec:authorize="hasAuthority('librarian')">All Bookings</a>
+    <a th:href="@{/users/members/list}" sec:authorize="hasAuthority('librarian')">Library Members</a>
+    <a th:href="@{/logout}" style="float: right">Logout</a>
+
+</div>
+<div class="jumbotron jumbotron-fluid" style="background-color: ghostwhite">
+    <div class="container">
+        <h1 style="text-align: center; font-family: fantasy;" class="login">All Bookings</h1>
+        <hr>
+        <table border="2" class="table table-bordered table-responsive-md">
+            <thead>
+            <tr>
+                <th>Booking Date</th>
+                <th>Status</th>
+                <th>Message</th>
+                <th>Details</th>
+                <th sec:authorize="hasAuthority('librarian')">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="booking : ${bookingsList}">
+                <td th:text="${booking.bookingDate}"></td>
+                <td th:text="${booking.status}"></td>
+                <td th:text="${booking.message}"></td>
+                <td>
+                    <a th:href="@{/bookings/booking/{bookingId}(bookingId=${booking.id})}"
+                       class="btn btn-info">View Booking Details</a>
+                </td>
+                <td sec:authorize="hasAuthority('librarian')">
+                    <a th:href="@{/bookings/booking/accept/{bookingId}(bookingId=${booking.id})}"
+                       class="btn btn-success">Accept</a>
+                    <a th:href="@{/bookings/booking/reject/{bookingId}(bookingId=${booking.id})}"
+                       class="btn btn-danger">Reject</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

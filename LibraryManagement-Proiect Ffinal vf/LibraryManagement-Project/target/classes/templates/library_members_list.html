@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/js/actions.js}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: ghostwhite">
+<div class="topnav">
+    <a class="active" th:href="@{/}">Home</a>
+    <a th:href="@{/bookings/all}">Member Orders</a>
+    <a th:href="@{/users/members/list}">Library Members</a>
+    <a th:href="@{/logout}" style="float: right">Logout</a>
+</div>
+<div class="jumbotron jumbotron-fluid" style="background-color: ghostwhite">
+    <div class="container">
+        <h1 style="text-align: center; font-family: fantasy;" class="login">Library Members</h1>
+        <hr>
+        <table class="table table-bordered table-responsive-md">
+            <thead>
+            <tr>
+                <th>Member Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${membersList}">
+                <td th:text="${member.id}"></td>
+                <td th:text="${member.firstName}"></td>
+                <td th:text="${member.lastName}"></td>
+                <td th:text="${member.username}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

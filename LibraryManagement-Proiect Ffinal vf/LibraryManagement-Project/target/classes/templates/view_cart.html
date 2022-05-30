@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/js/actions.js}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: ghostwhite">
+<div class="topnav">
+    <a class="active" th:href="@{/}">Home</a>
+    <a th:href="@{/logout}" style="float: right">Logout</a>
+</div>
+<div class="jumbotron jumbotron-fluid" style="background-color: ghostwhite">
+    <div class="container">
+        <h1 style="text-align: center; font-family: fantasy;" class="login">Books in the cart</h1>
+        <hr>
+        <h3 th:if="${emptyCart}" style="color: firebrick">The cart is empty, please borrow a book to complete
+            the booking</h3>
+        <div style="padding: 10px">
+            <h3 style="color: firebrick" th:if="${booksInCart.isEmpty()}">You haven't borrow any book </h3>
+            <hr>
+        </div>
+        <table class="table table-bordered table-responsive-md" th:if="${!booksInCart.isEmpty()}">
+            <thead>
+            <tr>
+                <th>Book Id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${booksInCart}">
+                <td th:text="${book.id}"></td>
+                <td th:text="${book.bookTitle}"></td>
+                <td th:text="${book.bookAuthor}"></td>
+                <td>
+                    <a th:href="@{/cart/remove/book/{bookId}(bookId=${book.id})}"
+                       class="btn btn-danger">Remove</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <form th:action="@{/cart/submit}" method="POST">
+                <label>Enter a special message:</label>
+                <div class="form-group">
+                    <input type="text" name="message" id="message" class="form-control input-lg"
+                           placeholder="message" required="true" autofocus="true"/>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3" style="float: none; margin: 0 auto;">
+                        <input type="submit" class="btn btn-primary btn-block" value="Submit Order"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <a th:href="@{/}"
+           class="btn btn-primary">Back to library
+        </a>
+    </div>
+</div>
+</body>
+</html>
